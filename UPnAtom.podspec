@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary      = 'An open source Universal Plug and Play library with a focus on media streaming coordination using the UPnP A/V profile.'
   s.homepage     = 'https://github.com/master-nevi/UPnAtom'
   s.authors      = { 'David Robles' => 'master-nevi@users.noreply.github.com' }
-  s.source       = { :git => 'https://github.com/master-nevi/UPnAtom.git', :tag => s.version.to_s }
+  s.source       = { :git => 'https://github.com/hang-h/UPnAtom.git', :tag => s.version.to_s }
   s.requires_arc = true
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.11'
