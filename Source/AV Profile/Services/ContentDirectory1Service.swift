@@ -28,7 +28,7 @@ import Ono
     public func getSearchCapabilities(_ success: @escaping (_ searchCapabilities: String?) -> Void, failure:@escaping (_ error: NSError) -> Void) {
         let parameters = SOAPRequestSerializer.Parameters(soapAction: "GetSearchCapabilities", serviceURN: urn, arguments: nil)
         
-        soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+        soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
             let responseObject = responseObject as? [String: String]
             success(responseObject?["SearchCaps"])
             }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -39,7 +39,7 @@ import Ono
     public func getSortCapabilities(_ success: @escaping (_ sortCapabilities: String?) -> Void, failure:@escaping (_ error: NSError) -> Void) {
         let parameters = SOAPRequestSerializer.Parameters(soapAction: "GetSortCapabilities", serviceURN: urn, arguments: nil)
         
-        soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+        soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
             let responseObject = responseObject as? [String: String]
             success(responseObject?["SortCaps"])
             }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -50,7 +50,7 @@ import Ono
     public func getSystemUpdateID(_ success: @escaping (_ systemUpdateID: String?) -> Void, failure:@escaping (_ error: NSError) -> Void) {
         let parameters = SOAPRequestSerializer.Parameters(soapAction: "GetSystemUpdateID", serviceURN: urn, arguments: nil)
         
-        soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+        soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
             let responseObject = responseObject as? [String: String]
             success(responseObject?["Id"])
             }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -69,7 +69,7 @@ import Ono
         
         let parameters = SOAPRequestSerializer.Parameters(soapAction: "Browse", serviceURN: urn, arguments: arguments)
         
-        soapSessionManager.post(controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+        soapSessionManager.post(controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
                 let responseObject = responseObject as? [String: String]
                 
@@ -102,7 +102,7 @@ import Ono
         // Check if the optional SOAP action "Search" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
                         let responseObject = responseObject as? [String: String]
                         
@@ -135,7 +135,7 @@ import Ono
         // Check if the optional SOAP action "CreateObject" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
                         let responseObject = responseObject as? [String: String]
                         
@@ -166,7 +166,7 @@ import Ono
         // Check if the optional SOAP action "DestroyObject" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     success()
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
                         failure(error as NSError)
@@ -188,7 +188,7 @@ import Ono
         // Check if the optional SOAP action "UpdateObject" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     success()
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
                         failure(error as NSError)
@@ -209,7 +209,7 @@ import Ono
         // Check if the optional SOAP action "ImportResource" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     let responseObject = responseObject as? [String: String]
                     success(responseObject?["TransferID"])
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -231,7 +231,7 @@ import Ono
         // Check if the optional SOAP action "ExportResource" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     let responseObject = responseObject as? [String: String]
                     success(responseObject?["TransferID"])
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -251,7 +251,7 @@ import Ono
         // Check if the optional SOAP action "StopTransferResource" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     success()
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
                         failure(error as NSError)
@@ -270,7 +270,7 @@ import Ono
         // Check if the optional SOAP action "GetTransferProgress" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     let responseObject = responseObject as? [String: String]
                     success(responseObject?["TransferStatus"], responseObject?["TransferLength"], responseObject?["TransferTotal"])
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
@@ -290,7 +290,7 @@ import Ono
         // Check if the optional SOAP action "DeleteResource" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     success()
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
                         failure(error as NSError)
@@ -311,7 +311,7 @@ import Ono
         // Check if the optional SOAP action "CreateReference" is supported
         supportsSOAPAction(actionParameters: parameters) { (isSupported) -> Void in
             if isSupported {
-                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
+                self.soapSessionManager.post(self.controlURL.absoluteString, parameters: parameters, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) -> Void in
                     let responseObject = responseObject as? [String: String]
                     success(responseObject?["NewID"])
                     }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in

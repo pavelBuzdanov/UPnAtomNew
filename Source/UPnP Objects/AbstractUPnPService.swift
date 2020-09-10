@@ -124,7 +124,7 @@ import AFNetworking
             let httpSessionManager = AFHTTPSessionManager()
             httpSessionManager.requestSerializer = AFHTTPRequestSerializer()
             httpSessionManager.responseSerializer = AFHTTPResponseSerializer()
-            httpSessionManager.get(serviceDescriptionURL.absoluteString, parameters: nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
+            httpSessionManager.get(serviceDescriptionURL.absoluteString, parameters: nil, headers: nil, progress:nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
                     guard let xmlData = responseObject as? Data else {
                         completion(nil, AbstractUPnPService._serviceDescriptionDefaultPrefix)

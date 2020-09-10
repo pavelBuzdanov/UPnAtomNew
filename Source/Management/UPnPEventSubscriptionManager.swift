@@ -514,21 +514,23 @@ extension AFHTTPSessionManager {
     
     fileprivate func dataTask(_ method: String, URLString: String, parameters: AnyObject, success: ((_ task: URLSessionDataTask, _ responseObject: AnyObject?) -> Void)?, failure: ((_ task: URLSessionDataTask?, _ error: NSError) -> Void)?) -> URLSessionDataTask? {
         let request: URLRequest!
-        var serializationError: NSError?
-        request = self.requestSerializer.request(withMethod: method, urlString: URL(string: URLString, relativeTo: self.baseURL)!.absoluteString, parameters: parameters, error: &serializationError) as URLRequest
-        
-        if let serializationError = serializationError {
+
+        do{
+            request = try self.requestSerializer.request(withMethod: method, urlString: URL(string: URLString, relativeTo: self.baseURL)!.absoluteString, parameters: parameters) as URLRequest
+        } catch {
+            let serializationError = error
             if let failure = failure {
                 (self.completionQueue != nil ? self.completionQueue! : DispatchQueue.main).async(execute: { () -> Void in
-                    failure(nil, serializationError)
+                    failure(nil, serializationError as NSError)
                 })
             }
-            
+
             return nil
+
         }
-        
+
         var dataTask: URLSessionDataTask!
-        dataTask = self.dataTask(with: request, completionHandler: { (response: URLResponse, responseObject: Any?, error: Error?) -> Void in
+        dataTask = self.dataTask(with: request, uploadProgress: nil, downloadProgress:nil, completionHandler: { (response: URLResponse, responseObject: Any?, error: Error?) -> Void in
             if let error = error {
                 if let failure = failure {
                     failure(dataTask, error as NSError)
