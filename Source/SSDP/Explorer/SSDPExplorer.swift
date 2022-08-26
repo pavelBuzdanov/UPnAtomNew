@@ -32,8 +32,7 @@ protocol SSDPExplorerDelegate: class {
     /// Assume explorer has stopped after a failure.
     func ssdpExplorer(_ explorer: SSDPExplorer, didFailWithError error: NSError)
 }
-
-class SSDPExplorer {
+class SSDPExplorer: NSObject {
     enum SSDPMessageType {
         case searchResponse
         case availableNotification
